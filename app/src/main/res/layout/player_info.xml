@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+
+    <TextView
+        android:id="@+id/points"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:textSize="50sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/numOfCities"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="0dp"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/points"
+        app:layout_constraintTop_toTopOf="@+id/points" />
+
+    <Button
+        android:id="@+id/cityUp"
+        android:layout_width="44dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:onClick="cityUp"
+        android:text="@string/textPoint1up"
+        app:layout_constraintStart_toEndOf="@+id/numOfCities"
+        app:layout_constraintTop_toBottomOf="@+id/numOfCities" />
+
+    <Button
+        android:id="@+id/cityDown"
+        android:layout_width="44dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:onClick="cityDown"
+        android:text="@string/textPoint1down"
+        app:layout_constraintEnd_toStartOf="@+id/numOfCities"
+        app:layout_constraintTop_toBottomOf="@+id/numOfCities" />
+
+    <TextView
+        android:id="@+id/numOfSettlements"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="0dp"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/numOfCities"
+        app:layout_constraintTop_toTopOf="@+id/points" />
+
+    <Button
+        android:id="@+id/SettlementUp"
+        android:layout_width="44dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:onClick="settlementUp"
+        android:text="@string/textPoint1up"
+        app:layout_constraintStart_toEndOf="@+id/numOfSettlements"
+        app:layout_constraintTop_toBottomOf="@+id/numOfSettlements" />
+
+    <Button
+        android:id="@+id/SettlementDown"
+        android:layout_width="44dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:onClick="settlementDown"
+        android:text="@string/textPoint1down"
+        app:layout_constraintEnd_toStartOf="@+id/numOfSettlements"
+        app:layout_constraintTop_toBottomOf="@+id/numOfSettlements" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
