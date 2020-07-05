@@ -9,11 +9,11 @@ class Player(var name: String = "Player") {
     var hasLongestRoads: Boolean = false
     var hasLargestArmy: Boolean = false
     val points: Int //computed propertyとして定義する
-        get() = calcScore()
+        get() = calcPoints()
 
     //Kotlinの場合、getter/setterは暗黙的に定義される。オーバーライドするときのみ明示的に定義する。
 
-    fun calcScore(): Int{
+    private fun calcPoints(): Int{
         var points: Int = numOfCities * 2 + numOfSettlements + numOfDevPoints
         if(hasLongestRoads){
             points += 2
@@ -24,12 +24,12 @@ class Player(var name: String = "Player") {
         return points
     }
 
-    fun resetAllPoints(){
+    fun reset(){
         this.numOfCities = 0
-        this.numOfSettlements = 0
+        this.numOfSettlements = 2
         this.numOfDevPoints = 0
         this.numOfUsedKnights = 0
-        this.lengthOfLongestRoads = 0
+        this.lengthOfLongestRoads = 1
         this.hasLargestArmy = false
         this.hasLongestRoads = false
     }

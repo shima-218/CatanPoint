@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    <backlog> 基本構成の実装,レイアウト </backlog>
+<!--    <backlog> レイアウト </backlog>
     <backlog> 名前欄 </backlog>
     <backlog> 最大交易路、最大騎士力対応 </backlog>
     <backlog> 名前を入力できるように </backlog>
