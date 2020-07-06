@@ -12,15 +12,16 @@ import com.example.catanpoint.model.entity.Player
 class MainActivity : AppCompatActivity() {
 
     private val players = listOf(
-        Pair(Player("player1"), R.id.player1),
-        Pair(Player("player2"), R.id.player2),
-        Pair(Player("player3"), R.id.player3),
-        Pair(Player("player4"), R.id.player4)
+        Pair(Player("こうじ"), R.id.player1),
+        Pair(Player("かとけん"), R.id.player2),
+        Pair(Player("さくまこうたろう"), R.id.player3),
+        Pair(Player("エリサマリガジェゴヒロヤス"), R.id.player4)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        this.displayPlayers()
         this.displayAllPoints()
     }
 
@@ -111,6 +112,13 @@ class MainActivity : AppCompatActivity() {
     private fun displayAllPoints() {
         for (player in players) {
             this.displayPoints(player.first, player.second)
+        }
+    }
+
+    private fun displayPlayers(){
+        for (player in players) {
+            val playerName = findViewById<View>(player.second).findViewById<TextView>(R.id.player_name)
+            playerName.text = java.lang.String.valueOf(player.first.name)
         }
     }
 
