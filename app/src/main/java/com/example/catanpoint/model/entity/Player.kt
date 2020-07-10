@@ -1,6 +1,8 @@
 package com.example.catanpoint.model.entity
 
-class Player(var name: String = "Player") {
+import android.graphics.Color
+
+class Player(var name: String = "Player", var color: Pair<Int,Int> = Pair(Color.BLACK,Color.BLACK)) {
     var numOfCities: Int = 0
     var numOfSettlements: Int = 2
     var numOfDevPoints: Int = 0
@@ -20,6 +22,9 @@ class Player(var name: String = "Player") {
         }
         if(hasLargestArmy){
             points += 2
+        }
+        if(points >= 100) {
+            return 99
         }
         return points
     }

@@ -4,5 +4,6 @@
     <string name="textPoint1down" >−</string>
     <string name="textPoint1up">＋</string>
     <string name="textResetButton">Reset</string>
+    <string name="textQuitButton">Quit</string>
 
 </resources>

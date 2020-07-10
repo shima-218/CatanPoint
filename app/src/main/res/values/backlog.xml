@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    <backlog> レイアウト </backlog>
-    <backlog> 最大交易路、最大騎士力対応 </backlog>
-    <backlog> 名前を入力できるように </backlog>
-    <backlog> 文字色をコマの色に </backlog>
-    <backlog> 文字色を選べるように </backlog>-->
+<!--    <backlog> 4 レイアウト 端末依存排除</backlog>
+    <backlog> 1 レイアウト ボタンの影</backlog>
+    <backlog> 3 名前を入力できるように </backlog>
+    2 レイアウト縦に
+
+    ・画面回転対応
+    <backlog>プレイヤー名の文字サイズと字数制限</backlog>
+-->
 
 
 </resources>

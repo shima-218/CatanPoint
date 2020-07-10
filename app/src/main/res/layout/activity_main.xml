@@ -11,6 +11,7 @@
         layout="@layout/player_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
@@ -18,7 +19,7 @@
         layout="@layout/player_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@id/player1"/>
 
     <include
@@ -26,7 +27,7 @@
         layout="@layout/player_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@id/player2"/>
 
     <include
@@ -34,17 +35,29 @@
         layout="@layout/player_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@id/player3" />
 
     <Button
         android:id="@+id/resetButton"
         android:layout_width="80dp"
         android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
         android:onClick="resetAllPoints"
         android:text="@string/textResetButton"
+        app:layout_constraintEnd_toStartOf="@id/quitButton"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:id="@+id/quitButton"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        android:onClick="resetAllPoints"
+        android:text="@string/textQuitButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
