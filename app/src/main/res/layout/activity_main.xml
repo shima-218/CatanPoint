@@ -55,7 +55,7 @@
         android:layout_height="40dp"
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="10dp"
-        android:onClick="resetAllPoints"
+        android:onClick="quit"
         android:text="@string/textQuitButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

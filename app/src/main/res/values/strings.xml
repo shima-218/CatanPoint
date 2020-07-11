@@ -3,7 +3,10 @@
 
     <string name="textPoint1down" >−</string>
     <string name="textPoint1up">＋</string>
+    <string name="textStartButton">Start</string>
     <string name="textResetButton">Reset</string>
     <string name="textQuitButton">Quit</string>
+    <string name="titleImageDescription">title</string>
+    <string name="playerInputHint">プレイヤー名</string>
 
 </resources>

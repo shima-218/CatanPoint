@@ -1,6 +1,6 @@
 package com.example.catanpoint.view.activities
 
-import android.graphics.Color
+import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
@@ -9,29 +9,39 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.example.catanpoint.R
-import com.example.catanpoint.model.entity.Player
-import com.example.catanpoint.model.usecase.decideLongestRoads
+import com.example.catanpoint.model.entity.*
 import com.example.catanpoint.model.usecase.decideLargestArmy
-import com.example.catanpoint.model.entity.RED
-import com.example.catanpoint.model.entity.ORANGE
-import com.example.catanpoint.model.entity.BLUE
-import com.example.catanpoint.model.entity.CREAM
+import com.example.catanpoint.model.usecase.decideLongestRoads
+
 
 class MainActivity : AppCompatActivity() {
 
-    private val players = listOf(
-        Pair(Player("こうじ", RED), R.id.player1),
-        Pair(Player("かとけん", ORANGE), R.id.player2),
-        Pair(Player("さくまこうたろう", BLUE), R.id.player3),
-        Pair(Player("エリサマリガジェゴヒロヤス", CREAM), R.id.player4)
-    )
-
+    private var players = mutableListOf<Pair<Player, Int>>()
     private var playerWithLongestRoadsIndex = -1
     private var playerWithLargestArmyIndex = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val intent = this.intent
+
+        val playerIntents = listOf(
+            Triple("player1", RED, R.id.player1),
+            Triple("player2", ORANGE, R.id.player2),
+            Triple("player3", BLUE, R.id.player3),
+            Triple("player4", CREAM, R.id.player4)
+        )
+
+        for ((iteration, player) in playerIntents.withIndex()) {
+            val playerName: String? = intent.getStringExtra(player.first)
+            if (playerName != null) {
+                players.add(iteration,Pair(
+                    Player(playerName, player.second),
+                    player.third
+                ))
+            }
+        }
+
         this.displayPlayers()
         this.displayAllPoints()
     }
@@ -118,16 +128,18 @@ class MainActivity : AppCompatActivity() {
         pointsView.text = java.lang.String.valueOf(player.points)
         pointsView.setTextColor(player.color.second)
 
-        for((iteration, _) in numOfXXXs.withIndex()){
-            val view = findViewById<View>(id).findViewById<View>(numOfXXXs[iteration].second)
+        for (numOfXXX in numOfXXXs) {
+            val view = findViewById<View>(id).findViewById<View>(numOfXXX.second)
                 .findViewById<TextView>(R.id.count)
-            view.text = java.lang.String.valueOf(numOfXXXs[iteration].first)
+            view.text = java.lang.String.valueOf(numOfXXX.first)
             view.setTextColor(player.color.second)
         }
+
     }
 
     private fun displayAllPoints() {
         this.decideSpecialPoints()
+        this.displaySpecialPoints()
         for (player in players) {
             this.displayPoints(player.first, player.second)
         }
@@ -139,6 +151,31 @@ class MainActivity : AppCompatActivity() {
         for ((iteration, player) in players.withIndex()) {
             player.first.hasLongestRoads = (iteration == playerWithLongestRoadsIndex)
             player.first.hasLargestArmy = (iteration == playerWithLargestArmyIndex)
+        }
+    }
+
+    private fun displaySpecialPoints() {
+        for (player in players) {
+            val roadsView = findViewById<View>(player.second).findViewById<View>(R.id.roads)
+                .findViewById<TextView>(R.id.count_title)
+            roadsView.text = java.lang.String.valueOf("最長交易路")
+            val knightsView = findViewById<View>(player.second).findViewById<View>(R.id.knights)
+                .findViewById<TextView>(R.id.count_title)
+            knightsView.text = java.lang.String.valueOf("騎士力")
+        }
+
+
+        if (playerWithLongestRoadsIndex != -1) {
+            val titleView =
+                findViewById<View>(players[playerWithLongestRoadsIndex].second).findViewById<View>(R.id.roads)
+                    .findViewById<TextView>(R.id.count_title)
+            titleView.text = java.lang.String.valueOf("★最長交易路★")
+        }
+        if (playerWithLargestArmyIndex != -1) {
+            val titleView =
+                findViewById<View>(players[playerWithLargestArmyIndex].second).findViewById<View>(R.id.knights)
+                    .findViewById<TextView>(R.id.count_title)
+            titleView.text = java.lang.String.valueOf("★騎士力★")
         }
     }
 
@@ -162,19 +199,27 @@ class MainActivity : AppCompatActivity() {
             view.setBackgroundColor(player.first.color.first)
 
             for ((iteration, _) in countTitles.withIndex()) {
-                val titleView = findViewById<View>(player.second).findViewById<View>(countTitles[iteration].second)
-                    .findViewById<TextView>(R.id.count_title)
+                val titleView =
+                    findViewById<View>(player.second).findViewById<View>(countTitles[iteration].second)
+                        .findViewById<TextView>(R.id.count_title)
                 titleView.text = java.lang.String.valueOf(countTitles[iteration].first)
                 titleView.setTextColor(player.first.color.second)
                 val btn: GradientDrawable =
-                    ResourcesCompat.getDrawable(resources, R.drawable.button, null) as GradientDrawable
+                    ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.button,
+                        null
+                    ) as GradientDrawable
                 btn.setColor(player.first.color.first)
-                val upView = findViewById<View>(player.second).findViewById<View>(countTitles[iteration].second)
-                    .findViewById<TextView>(R.id.up)
+                btn.setStroke(2, player.first.color.second)
+                val upView =
+                    findViewById<View>(player.second).findViewById<View>(countTitles[iteration].second)
+                        .findViewById<TextView>(R.id.up)
                 upView.setTextColor(player.first.color.second)
                 upView.background = btn
-                val downView = findViewById<View>(player.second).findViewById<View>(countTitles[iteration].second)
-                    .findViewById<TextView>(R.id.down)
+                val downView =
+                    findViewById<View>(player.second).findViewById<View>(countTitles[iteration].second)
+                        .findViewById<TextView>(R.id.down)
                 downView.setTextColor(player.first.color.second)
                 downView.background = btn
             }
@@ -197,5 +242,10 @@ class MainActivity : AppCompatActivity() {
             player.first.reset()
         }
         this.displayAllPoints()
+    }
+
+    fun quit(view: View) {
+        val intent = Intent(this, TitleActivity::class.java)
+        startActivity(intent)
     }
 }
