@@ -1,17 +1,16 @@
 package com.example.catanpoint.view.activities
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.catanpoint.R
-import com.example.catanpoint.model.entity.RED
-import com.example.catanpoint.model.entity.ORANGE
 import com.example.catanpoint.model.entity.BLUE
 import com.example.catanpoint.model.entity.CREAM
+import com.example.catanpoint.model.entity.ORANGE
+import com.example.catanpoint.model.entity.RED
 
 class TitleActivity : AppCompatActivity() {
 
@@ -31,8 +30,10 @@ class TitleActivity : AppCompatActivity() {
 
         for(player in players) {
             val view: TextView = findViewById<View>(player.third).findViewById(R.id.player)
-            view.text = player.first
+            view.hint = player.first
             view.setTextColor(player.second.second)
+            val btn: Button = findViewById<View>(player.third).findViewById(R.id.player_color)
+            btn.setBackgroundColor(player.second.second)
         }
     }
 

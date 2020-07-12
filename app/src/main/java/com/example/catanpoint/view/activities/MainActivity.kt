@@ -1,6 +1,9 @@
 package com.example.catanpoint.view.activities
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
@@ -19,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private var players = mutableListOf<Pair<Player, Int>>()
     private var playerWithLongestRoadsIndex = -1
     private var playerWithLargestArmyIndex = -1
+    private var quitDialog: AlertDialog.Builder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,14 +35,23 @@ class MainActivity : AppCompatActivity() {
             Triple("player3", BLUE, R.id.player3),
             Triple("player4", CREAM, R.id.player4)
         )
+        val playerIntents2 = listOf(
+            "プレイヤー１","プレイヤー２","プレイヤー３","プレイヤー４"
+        )
+        //ここ汚いからオブジェクトちゃんと作る
 
         for ((iteration, player) in playerIntents.withIndex()) {
-            val playerName: String? = intent.getStringExtra(player.first)
+            var playerName: String? = intent.getStringExtra(player.first)
+            if (playerName.equals("")){
+                playerName=playerIntents2[iteration]
+            }
             if (playerName != null) {
-                players.add(iteration,Pair(
-                    Player(playerName, player.second),
-                    player.third
-                ))
+                players.add(
+                    iteration, Pair(
+                        Player(playerName, player.second),
+                        player.third
+                    )
+                )
             }
         }
 
@@ -245,7 +258,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun quit(view: View) {
-        val intent = Intent(this, TitleActivity::class.java)
-        startActivity(intent)
+        if (quitDialog == null) {
+            quitDialog = AlertDialog.Builder(this)
+                .setTitle("ゲームを終了しますか？")
+                .setPositiveButton("終了する") { _, _ ->
+                    val intent = Intent(this, TitleActivity::class.java)
+                    startActivity(intent)
+                }
+                .setNegativeButton("キャンセル", null)
+        }
+        val btn = quitDialog!!.show()
+        btn.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
+        btn.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLUE)
     }
 }

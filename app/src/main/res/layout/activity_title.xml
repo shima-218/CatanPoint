@@ -53,11 +53,11 @@
     <include
         android:id="@+id/player4"
         layout="@layout/player_input"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
-        app:layout_constraintStart_toEndOf="@id/player3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/player3"
         app:layout_constraintTop_toBottomOf="@id/player2" />
 
     <Button
