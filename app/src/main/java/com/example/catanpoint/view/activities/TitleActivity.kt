@@ -28,9 +28,9 @@ class TitleActivity : AppCompatActivity() {
         for(player in players) {
             val view: TextView = findViewById<View>(player.third).findViewById(R.id.player)
             view.hint = player.first
-            view.setTextColor(player.second.second)
+            view.setTextColor(player.second.frontColor)
             val btn: Button = findViewById<View>(player.third).findViewById(R.id.player_color)
-            btn.setBackgroundColor(player.second.second)
+            btn.setBackgroundColor(player.second.frontColor)
         }
     }
 

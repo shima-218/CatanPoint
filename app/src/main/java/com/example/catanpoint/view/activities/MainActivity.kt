@@ -129,13 +129,13 @@ class MainActivity : AppCompatActivity() {
 
         val pointsView = findViewById<View>(id).findViewById<TextView>(R.id.points)
         pointsView.text = java.lang.String.valueOf(player.points)
-        pointsView.setTextColor(player.color.second)
+        pointsView.setTextColor(player.color.frontColor)
 
         for (numOfXXX in numOfXXXs) {
             val view = findViewById<View>(id).findViewById<View>(numOfXXX.second)
                 .findViewById<TextView>(R.id.count)
             view.text = java.lang.String.valueOf(numOfXXX.first)
-            view.setTextColor(player.color.second)
+            view.setTextColor(player.color.frontColor)
         }
 
     }
@@ -196,34 +196,34 @@ class MainActivity : AppCompatActivity() {
             val playerName =
                 findViewById<View>(player.second).findViewById<TextView>(R.id.player_name)
             playerName.text = java.lang.String.valueOf(player.first.name)
-            playerName.setTextColor(player.first.color.second)
+            playerName.setTextColor(player.first.color.frontColor)
 
             val view = findViewById<View>(player.second)
-            view.setBackgroundColor(player.first.color.first)
+            view.setBackgroundColor(player.first.color.backColor)
 
             for ((iteration, _) in countTitles.withIndex()) {
                 val titleView =
                     findViewById<View>(player.second).findViewById<View>(countTitles[iteration].second)
                         .findViewById<TextView>(R.id.count_title)
                 titleView.text = java.lang.String.valueOf(countTitles[iteration].first)
-                titleView.setTextColor(player.first.color.second)
+                titleView.setTextColor(player.first.color.frontColor)
                 val btn: GradientDrawable =
                     ResourcesCompat.getDrawable(
                         resources,
                         R.drawable.button,
                         null
                     ) as GradientDrawable
-                btn.setColor(player.first.color.first)
-                btn.setStroke(2, player.first.color.second)
+                btn.setColor(player.first.color.backColor)
+                btn.setStroke(2, player.first.color.frontColor)
                 val upView =
                     findViewById<View>(player.second).findViewById<View>(countTitles[iteration].second)
                         .findViewById<TextView>(R.id.up)
-                upView.setTextColor(player.first.color.second)
+                upView.setTextColor(player.first.color.frontColor)
                 upView.background = btn
                 val downView =
                     findViewById<View>(player.second).findViewById<View>(countTitles[iteration].second)
                         .findViewById<TextView>(R.id.down)
-                downView.setTextColor(player.first.color.second)
+                downView.setTextColor(player.first.color.frontColor)
                 downView.background = btn
             }
         }
