@@ -1,7 +1,6 @@
 package com.example.catanpoint.view.activities
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
@@ -12,7 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.example.catanpoint.R
-import com.example.catanpoint.model.entity.*
+import com.example.catanpoint.model.entity.Player
 import com.example.catanpoint.model.usecase.decideLargestArmy
 import com.example.catanpoint.model.usecase.decideLongestRoads
 
@@ -30,27 +29,18 @@ class MainActivity : AppCompatActivity() {
         val intent = this.intent
 
         val playerIntents = listOf(
-            Triple("player1", RED, R.id.player1),
-            Triple("player2", ORANGE, R.id.player2),
-            Triple("player3", BLUE, R.id.player3),
-            Triple("player4", CREAM, R.id.player4)
+            Pair("player1", R.id.player1),
+            Pair("player2", R.id.player2),
+            Pair("player3", R.id.player3),
+            Pair("player4", R.id.player4)
         )
-        val playerIntents2 = listOf(
-            "プレイヤー１","プレイヤー２","プレイヤー３","プレイヤー４"
-        )
-        //ここ汚いからオブジェクトちゃんと作る
 
-        for ((iteration, player) in playerIntents.withIndex()) {
-            var playerName: String? = intent.getStringExtra(player.first)
-            if (playerName.equals("")){
-                playerName=playerIntents2[iteration]
-            }
-            if (playerName != null) {
+        for ((iteration, playerIntent) in playerIntents.withIndex()) {
+            val player = intent.getSerializableExtra(playerIntent.first)
+            if (player is Player) {
                 players.add(
-                    iteration, Pair(
-                        Player(playerName, player.second),
-                        player.third
-                    )
+                    iteration,
+                    Pair(player, playerIntent.second)
                 )
             }
         }

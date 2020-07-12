@@ -7,10 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.catanpoint.R
-import com.example.catanpoint.model.entity.BLUE
-import com.example.catanpoint.model.entity.CREAM
-import com.example.catanpoint.model.entity.ORANGE
-import com.example.catanpoint.model.entity.RED
+import com.example.catanpoint.model.entity.*
 
 class TitleActivity : AppCompatActivity() {
 
@@ -48,11 +45,12 @@ class TitleActivity : AppCompatActivity() {
         )
 
         for (player in players) {
-            val playerName: TextView = findViewById<View>(player.third).findViewById(R.id.player)
-            intent.putExtra(player.first, playerName.text.toString())
-            intent.putExtra(player.first + "Color", player.second)
+            var playerName: String = findViewById<View>(player.third).findViewById<TextView>(R.id.player).text.toString()
+            if (playerName == ""){
+                playerName=player.first //1つの変数に複数の意味を持たせているので後で変える
+            }
+            intent.putExtra(player.first, Player(playerName,player.second))
         }
-
         startActivity(intent)
     }
 
