@@ -1,9 +1,8 @@
 package com.example.catanpoint.model.entity
 
-import android.graphics.Color
 import java.io.Serializable
 
-class Player(var name: String = "Player", var color: CustomColor = BLACK): Serializable {
+data class Player(var name: String = "Player", var color: CustomColor = BLACK): Serializable {
     var numOfCities: Int = 0
     var numOfSettlements: Int = 2
     var numOfDevPoints: Int = 0
@@ -11,10 +10,8 @@ class Player(var name: String = "Player", var color: CustomColor = BLACK): Seria
     var lengthOfLongestRoads: Int = 1
     var hasLongestRoads: Boolean = false
     var hasLargestArmy: Boolean = false
-    val points: Int //computed propertyとして定義する
+    val points: Int
         get() = calcPoints()
-
-    //Kotlinの場合、getter/setterは暗黙的に定義される。オーバーライドするときのみ明示的に定義する。
 
     private fun calcPoints(): Int{
         var points: Int = numOfCities * 2 + numOfSettlements + numOfDevPoints

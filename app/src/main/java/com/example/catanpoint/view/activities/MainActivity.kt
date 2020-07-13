@@ -232,7 +232,7 @@ class MainActivity : AppCompatActivity() {
     private fun decidePlayer(view: View): Pair<Player?, Int?> {
         for (player in players) {
             if (view.parent.parent == findViewById(player.second)) {
-                return Pair(player.first, player.second)
+                return player
             }
         }
         return Pair(null, null)

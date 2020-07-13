@@ -23,6 +23,7 @@
         android:id="@+id/player_color"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:onClick="changeColor"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/player"
