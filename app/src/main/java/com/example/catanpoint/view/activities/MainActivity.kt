@@ -195,17 +195,18 @@ class MainActivity : AppCompatActivity() {
         for (player in players) {
             val playerName =
                 findViewById<View>(player.second).findViewById<TextView>(R.id.player_name)
-            playerName.text = java.lang.String.valueOf(player.first.name)
+            playerName.text = this.twoLine(java.lang.String.valueOf(player.first.name)).first
+            playerName.maxLines = this.twoLine(java.lang.String.valueOf(player.first.name)).second
             playerName.setTextColor(player.first.color.frontColor)
 
             val view = findViewById<View>(player.second)
             view.setBackgroundColor(player.first.color.backColor)
 
-            for ((iteration, _) in countTitles.withIndex()) {
+            for (countTitle in countTitles) {
                 val titleView =
-                    findViewById<View>(player.second).findViewById<View>(countTitles[iteration].second)
+                    findViewById<View>(player.second).findViewById<View>(countTitle.second)
                         .findViewById<TextView>(R.id.count_title)
-                titleView.text = java.lang.String.valueOf(countTitles[iteration].first)
+                titleView.text = java.lang.String.valueOf(countTitle.first)
                 titleView.setTextColor(player.first.color.frontColor)
                 val btn: GradientDrawable =
                     ResourcesCompat.getDrawable(
@@ -216,17 +217,24 @@ class MainActivity : AppCompatActivity() {
                 btn.setColor(player.first.color.backColor)
                 btn.setStroke(2, player.first.color.frontColor)
                 val upView =
-                    findViewById<View>(player.second).findViewById<View>(countTitles[iteration].second)
+                    findViewById<View>(player.second).findViewById<View>(countTitle.second)
                         .findViewById<TextView>(R.id.up)
                 upView.setTextColor(player.first.color.frontColor)
                 upView.background = btn
                 val downView =
-                    findViewById<View>(player.second).findViewById<View>(countTitles[iteration].second)
+                    findViewById<View>(player.second).findViewById<View>(countTitle.second)
                         .findViewById<TextView>(R.id.down)
                 downView.setTextColor(player.first.color.frontColor)
                 downView.background = btn
             }
         }
+    }
+
+    private fun twoLine(string: String): Pair<String,Int>{
+        if (string.length >= 6){
+            return Pair(string.substring(0,3) + System.getProperty ("line.separator") + string.substring(3,string.length),2)
+        }
+        return Pair(string,1)
     }
 
     private fun decidePlayer(view: View): Pair<Player?, Int?> {
@@ -248,6 +256,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun quit(view: View) {
+        this.quit()
+    }
+
+    private fun quit(){
         if (quitDialog == null) {
             quitDialog = AlertDialog.Builder(this)
                 .setTitle("ゲームを終了しますか？")
@@ -260,5 +272,9 @@ class MainActivity : AppCompatActivity() {
         val btn = quitDialog!!.show()
         btn.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
         btn.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLUE)
+    }
+
+    override fun onBackPressed() {
+        this.quit()
     }
 }
