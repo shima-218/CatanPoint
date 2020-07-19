@@ -8,5 +8,7 @@
     <string name="textQuitButton">Quit</string>
     <string name="titleImageDescription">title</string>
     <string name="playerInputHint">プレイヤー名</string>
+    <string name="largest_army">最大騎士力</string>
+    <string name="longest_roads">最長交易路</string>
 
 </resources>

@@ -20,17 +20,19 @@
         android:maxLines="2"
         app:layout_constraintEnd_toStartOf="@+id/cities"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/points"/>
 
     <TextView
         android:id="@+id/points"
         android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:gravity="center_horizontal|center_vertical"
         android:textSize="35sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/cities"
-        app:layout_constraintTop_toBottomOf="@+id/player_name" />
+        app:layout_constraintTop_toBottomOf="@+id/player_name"
+        app:layout_constraintBottom_toTopOf="@+id/longest_roads"/>
 
     <include
         android:id="@+id/cities"
@@ -88,5 +90,27 @@
         app:layout_constraintStart_toEndOf="@+id/knights"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/longest_roads"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_horizontal|center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/largest_army"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/points" />
+
+    <TextView
+        android:id="@+id/largest_army"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_horizontal|center_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/points"
+        app:layout_constraintStart_toEndOf="@+id/longest_roads"
+        app:layout_constraintEnd_toStartOf="@+id/cities"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
