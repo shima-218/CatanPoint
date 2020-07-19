@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/title"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:contentDescription="@string/titleImageDescription"
         android:scaleType="centerCrop"
         android:src="@drawable/title_image"
@@ -18,14 +18,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintWidth_percent="0.78"
+        app:layout_constraintDimensionRatio="H,3:1" />
 
     <include
         android:id="@+id/player1"
         layout="@layout/player_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="@dimen/margin_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/player2"
         app:layout_constraintTop_toBottomOf="@id/title"/>
@@ -35,7 +37,7 @@
         layout="@layout/player_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="@dimen/margin_title"
         app:layout_constraintStart_toEndOf="@id/player1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title"/>
@@ -45,7 +47,7 @@
         layout="@layout/player_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="@dimen/margin_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/player4"
         app:layout_constraintTop_toBottomOf="@id/player1"/>
@@ -55,21 +57,23 @@
         layout="@layout/player_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="@dimen/margin_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/player3"
         app:layout_constraintTop_toBottomOf="@id/player2" />
 
     <Button
         android:id="@+id/startButton"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_title"
         android:onClick="start"
         android:text="@string/textStartButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/player4"/>
+        app:layout_constraintTop_toBottomOf="@id/player4"
+        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintDimensionRatio="H,2:1"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
