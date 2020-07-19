@@ -2,46 +2,48 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="60dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/count_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:gravity="center_horizontal|center_vertical"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/count"
         android:layout_width="40dp"
-        android:layout_height="30dp"
+        android:layout_height="0dp"
         android:gravity="center_horizontal|center_vertical"
         android:includeFontPadding="false"
         android:textSize="27sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/up" />
+        app:layout_constraintTop_toBottomOf="@+id/up"
+        app:layout_constraintDimensionRatio="W,3:4"/>
 
     <Button
         android:id="@+id/up"
         android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_height="0dp"
         android:onClick="changeCount"
         android:padding="0dp"
         android:text="@string/textPoint1up"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/count_title" />
+        app:layout_constraintTop_toBottomOf="@id/count_title"
+        app:layout_constraintDimensionRatio="W,1:1"/>
 
     <Button
         android:id="@+id/down"
         android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_height="0dp"
         android:onClick="changeCount"
         android:padding="0dp"
         android:text="@string/textPoint1down"
@@ -50,6 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/count"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="W,1:1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

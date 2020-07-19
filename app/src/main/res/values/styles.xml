@@ -13,5 +13,6 @@
     </style>
 
     <dimen name="margin_title">30dp</dimen>
+    <dimen name="margin_count">5dp</dimen>
 
 </resources>

@@ -9,7 +9,7 @@
     <include
         android:id="@+id/player1"
         layout="@layout/player_info"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,7 +19,7 @@
     <include
         android:id="@+id/player2"
         layout="@layout/player_info"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
     <include
         android:id="@+id/player3"
         layout="@layout/player_info"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
     <include
         android:id="@+id/player4"
         layout="@layout/player_info"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,24 +48,28 @@
 
     <Button
         android:id="@+id/resetButton"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="10dp"
         android:onClick="resetAllPoints"
         android:text="@string/textResetButton"
         app:layout_constraintEnd_toStartOf="@id/quitButton"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintDimensionRatio="H,2:1"/>
 
     <Button
         android:id="@+id/quitButton"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="10dp"
         android:onClick="quit"
         android:text="@string/textQuitButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintDimensionRatio="H,2:1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
