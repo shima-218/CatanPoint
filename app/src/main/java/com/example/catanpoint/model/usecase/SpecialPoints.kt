@@ -1,6 +1,7 @@
 package com.example.catanpoint.model.usecase
 
 import com.example.catanpoint.model.entity.Player
+import java.util.Collections.max
 
 fun decideLongestRoads(players: List<Pair<Player, Int>>, preWinnerIndex: Int): Int {
     return decideTopPlayer(players,preWinnerIndex,5,1)
@@ -17,17 +18,17 @@ private fun decideTopPlayer(
     option: Int
 ): Int {
 
-    val playersCounts: MutableList<Pair<Int,Boolean>> = mutableListOf()
+    val playersCounts: MutableList<Int> = mutableListOf()
     //option 1:最長交易路　2:最大騎士力
     when (option) {
         1 -> {
-            for ((iteration, _) in players.withIndex()) {
-                playersCounts.add(Pair(players[iteration].first.lengthOfLongestRoads,players[iteration].first.hasLongestRoads))
+            for (player in players) {
+                playersCounts.add(player.first.lengthOfLongestRoads)
             }
         }
         2 -> {
-            for ((iteration, _) in players.withIndex()) {
-                playersCounts.add(Pair(players[iteration].first.numOfUsedKnights,players[iteration].first.hasLargestArmy))
+            for (player in players) {
+                playersCounts.add(player.first.numOfUsedKnights)
             }
         }
         else -> {
@@ -35,29 +36,28 @@ private fun decideTopPlayer(
         }
     }
 
-    var winnerIndex: Int = preWinnerIndex
-    var winnersCount: Int = -1
+    val max = max(playersCounts)
+    val maxCount = playersCounts.count {it==max}
 
-    //今までの「最大」のプレイヤーの保持数を取得
-    if (winnerIndex != -1) {
-        winnersCount = playersCounts[winnerIndex].first
+    //最大が閾値以下なら、得点を得られるプレイヤーはいない
+    if (max < threshold){
+        return -1
     }
 
-    //今までの「最大」のプレイヤーの保持数が閾値以下に減っていたら、初期値に戻す
-    if (winnersCount < threshold) {
-        winnerIndex = -1
-        winnersCount = 0
+    //最大が閾値以上かつ、単独の場合、そのプレイヤが得点を得る
+    if(maxCount == 1){
+        return playersCounts.indexOf(max)
     }
 
-    //新しい「最大持ち」のプレイヤーを決める
-    for ((iteration, player) in playersCounts.withIndex()) {
-        if (player.first >= threshold && player.first > winnersCount) {
-            winnerIndex = iteration
-            winnersCount = player.first
-        }
+    //最大が閾値以上かつ、同値がある場合
+    if(preWinnerIndex != -1 && playersCounts[preWinnerIndex]==max){
+        //追いつかれた場合は、現在得点を得ているプレイヤーのまま変わらない
+        //分断された場合で、最大だったプレイヤーが分断されても同値で最大の場合、最大だったプレイヤーのまま変わらない
+        return preWinnerIndex
     }
+    //分断された場合で、最大だったプレイヤー以外が同値の場合、誰もポイントは入らない
+    return -1
 
-    return winnerIndex
 }
 
 
