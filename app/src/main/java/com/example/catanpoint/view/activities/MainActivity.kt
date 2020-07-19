@@ -161,7 +161,7 @@ class MainActivity : AppCompatActivity() {
         for (player in players) {
             val roadsView = findViewById<View>(player.second).findViewById<View>(R.id.roads)
                 .findViewById<TextView>(R.id.count_title)
-            roadsView.text = java.lang.String.valueOf("最長交易路")
+            roadsView.text = java.lang.String.valueOf("最長"+System.getProperty ("line.separator")+"交易路")
             val knightsView = findViewById<View>(player.second).findViewById<View>(R.id.knights)
                 .findViewById<TextView>(R.id.count_title)
             knightsView.text = java.lang.String.valueOf("騎士力")
@@ -172,13 +172,13 @@ class MainActivity : AppCompatActivity() {
             val titleView =
                 findViewById<View>(players[playerWithLongestRoadsIndex].second).findViewById<View>(R.id.roads)
                     .findViewById<TextView>(R.id.count_title)
-            titleView.text = java.lang.String.valueOf("★最長交易路★")
+            titleView.text = java.lang.String.valueOf("★最長"+System.getProperty ("line.separator")+"交易路")
         }
         if (playerWithLargestArmyIndex != -1) {
             val titleView =
                 findViewById<View>(players[playerWithLargestArmyIndex].second).findViewById<View>(R.id.knights)
                     .findViewById<TextView>(R.id.count_title)
-            titleView.text = java.lang.String.valueOf("★騎士力★")
+            titleView.text = java.lang.String.valueOf("★" + System.getProperty ("line.separator") + "騎士力")
         }
     }
 
@@ -187,8 +187,8 @@ class MainActivity : AppCompatActivity() {
         val countTitles = listOf(
             Pair("都市", R.id.cities),
             Pair("開拓地", R.id.settlements),
-            Pair("最長交易路", R.id.roads),
-            Pair("騎士力", R.id.knights),
+            Pair("", R.id.roads),
+            Pair("", R.id.knights),
             Pair("発展", R.id.develops)
         )
 

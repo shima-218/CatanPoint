@@ -4,21 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="70dp">
 
     <TextView
         android:id="@+id/player_name"
         android:layout_width="90dp"
         android:layout_height="60dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:autoSizeMaxTextSize="30sp"
-        android:autoSizeMinTextSize="12sp"
         android:autoSizeTextType="uniform"
         android:gravity="center_horizontal|center_vertical"
         android:maxLines="2"
-        app:layout_constraintEnd_toStartOf="@+id/cities"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeMaxTextSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,11 +24,12 @@
         android:id="@+id/points"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:gravity="center_horizontal|center_vertical"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         android:textSize="35sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/cities"
-        app:layout_constraintTop_toBottomOf="@+id/player_name" />
+        android:gravity="center_horizontal|center_vertical"
+        app:layout_constraintStart_toEndOf="@id/player_name"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
         android:id="@+id/cities"
@@ -39,10 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp"
         android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintStart_toEndOf="@+id/player_name"
-        app:layout_constraintEnd_toStartOf="@+id/settlements"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/points"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <include
         android:id="@+id/settlements"
@@ -50,43 +47,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@+id/cities"
-        app:layout_constraintEnd_toStartOf="@+id/roads"
-        app:layout_constraintTop_toTopOf="parent"  />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <include
         android:id="@+id/roads"
         layout="@layout/single_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@+id/settlements"
-        app:layout_constraintEnd_toStartOf="@+id/knights"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <include
         android:id="@+id/knights"
         layout="@layout/single_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@+id/roads"
-        app:layout_constraintEnd_toStartOf="@+id/develops"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <include
         android:id="@+id/develops"
         layout="@layout/single_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@+id/knights"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
