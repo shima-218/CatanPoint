@@ -2,6 +2,7 @@ package com.example.catanpoint.view.activities
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -44,7 +45,6 @@ class MainActivity : AppCompatActivity() {
                 )
             }
         }
-
         this.displayPlayers()
         this.displayAllPoints()
     }
@@ -158,13 +158,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displaySpecialPoints() {
+
+        //画面の向きによって改行位置が異なる
+        var roadsText = "最長"+System.getProperty ("line.separator")+"交易路"
+        var knightsText = "最大"+System.getProperty ("line.separator")+"騎士力"
+        if(resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            roadsText = "最長交易路"
+            knightsText = "最大騎士力"
+        }
+
         for (player in players) {
             val roadsView = findViewById<View>(player.second).findViewById<TextView>(R.id.longest_roads)
-            val roadsText = "最長"+System.getProperty ("line.separator")+"交易路"
             roadsView.text = roadsText
             roadsView.setTextColor(player.first.color.backColor)
             val knightsView = findViewById<View>(player.second).findViewById<TextView>(R.id.largest_army)
-            val knightsText = "最大"+System.getProperty ("line.separator")+"騎士力"
             knightsView.text = knightsText
             knightsView.setTextColor(player.first.color.backColor)
         }
@@ -183,14 +190,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun displayPlayers() {
 
+        //最長交易路のみ、画面の向きによって改行位置が異なる
+        var roads = Pair("最長"+System.getProperty ("line.separator")+"交易路", R.id.roads)
+        if(resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            roads = Pair("最長交易路",R.id.roads)
+        }
+
+        //各項目のリスト
         val countTitles = listOf(
             Pair("都市", R.id.cities),
             Pair("開拓地", R.id.settlements),
-            Pair("最長"+System.getProperty ("line.separator")+"交易路", R.id.roads),
+            roads,
             Pair("騎士力", R.id.knights),
             Pair("発展", R.id.develops)
         )
 
+        //プレイヤー毎
         for (player in players) {
             val playerName =
                 findViewById<View>(player.second).findViewById<TextView>(R.id.player_name)
@@ -201,6 +216,7 @@ class MainActivity : AppCompatActivity() {
             val view = findViewById<View>(player.second)
             view.setBackgroundColor(player.first.color.backColor)
 
+            //項目毎
             for (countTitle in countTitles) {
                 val titleView =
                     findViewById<View>(player.second).findViewById<View>(countTitle.second)

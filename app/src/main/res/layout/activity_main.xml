@@ -48,7 +48,7 @@
 
     <Button
         android:id="@+id/resetButton"
-        android:layout_width="0dp"
+        android:layout_width="80dp"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="10dp"
@@ -56,12 +56,11 @@
         android:text="@string/textResetButton"
         app:layout_constraintEnd_toStartOf="@id/quitButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_percent="0.2"
         app:layout_constraintDimensionRatio="H,2:1"/>
 
     <Button
         android:id="@+id/quitButton"
-        android:layout_width="0dp"
+        android:layout_width="80dp"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="10dp"
@@ -69,7 +68,6 @@
         android:text="@string/textQuitButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_percent="0.2"
         app:layout_constraintDimensionRatio="H,2:1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

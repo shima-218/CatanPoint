@@ -23,12 +23,13 @@
     <TextView
         android:id="@+id/points"
         android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:textSize="35sp"
+        android:layout_height="35dp"
+        android:textSize="30sp"
         android:gravity="center_horizontal|center_vertical"
+        android:layout_marginStart="@dimen/margin_count"
+        android:layout_marginEnd="@dimen/margin_count"
         app:layout_constraintStart_toEndOf="@id/player_name"
+        app:layout_constraintEnd_toStartOf="@+id/cities"
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
@@ -37,48 +38,77 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="@dimen/margin_count"
+        android:layout_marginEnd="@dimen/margin_count"
         app:layout_constraintStart_toEndOf="@+id/points"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/settlements"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
         android:id="@+id/settlements"
         layout="@layout/single_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="@dimen/margin_count"
+        android:layout_marginEnd="@dimen/margin_count"
         app:layout_constraintStart_toEndOf="@+id/cities"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/roads"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
         android:id="@+id/roads"
         layout="@layout/single_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="@dimen/margin_count"
+        android:layout_marginEnd="@dimen/margin_count"
         app:layout_constraintStart_toEndOf="@+id/settlements"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/knights"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
         android:id="@+id/knights"
         layout="@layout/single_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="@dimen/margin_count"
+        android:layout_marginEnd="@dimen/margin_count"
         app:layout_constraintStart_toEndOf="@+id/roads"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/develops"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
         android:id="@+id/develops"
         layout="@layout/single_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="@dimen/margin_count"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/knights"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/longest_roads"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:textSize="12sp"
+        android:gravity="center_horizontal|center_vertical"
+        app:layout_constraintEnd_toEndOf="@+id/points"
+        app:layout_constraintStart_toStartOf="@+id/points"
+        app:layout_constraintTop_toBottomOf="@+id/points" />
+
+    <TextView
+        android:id="@+id/largest_army"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:textSize="12sp"
+        android:gravity="center_horizontal|center_vertical"
+        app:layout_constraintEnd_toEndOf="@+id/points"
+        app:layout_constraintStart_toStartOf="@+id/points"
+        app:layout_constraintTop_toBottomOf="@+id/longest_roads"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
