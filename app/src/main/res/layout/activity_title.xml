@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,12 +14,12 @@
         android:scaleType="centerCrop"
         android:src="@drawable/title_image"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="H,3:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3"
-        app:layout_constraintWidth_percent="0.78"
-        app:layout_constraintDimensionRatio="H,3:1" />
+        app:layout_constraintWidth_percent="0.78" />
 
     <include
         android:id="@+id/player1"
@@ -28,9 +27,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_title"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/player2"
-        app:layout_constraintTop_toBottomOf="@id/title"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
     <include
         android:id="@+id/player2"
@@ -38,9 +37,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_title"
-        app:layout_constraintStart_toEndOf="@id/player1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title"/>
+        app:layout_constraintStart_toEndOf="@id/player1"
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
     <include
         android:id="@+id/player3"
@@ -48,9 +47,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_title"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/player4"
-        app:layout_constraintTop_toBottomOf="@id/player1"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/player1" />
 
     <include
         android:id="@+id/player4"
@@ -62,18 +61,50 @@
         app:layout_constraintStart_toEndOf="@id/player3"
         app:layout_constraintTop_toBottomOf="@id/player2" />
 
+    <RadioGroup
+        android:id="@+id/playerNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/player3">
+
+        <RadioButton
+            android:id="@+id/threePlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/threePlayer"
+            android:buttonTint="@color/defaultText"
+            android:textColor="@color/defaultText"
+            app:layout_constraintStart_toStartOf="@id/playerNum"
+            app:layout_constraintTop_toTopOf="@id/playerNum" />
+
+        <RadioButton
+            android:id="@+id/fourPlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fourPlayer"
+            android:buttonTint="@color/defaultText"
+            android:textColor="@color/defaultText"
+            app:layout_constraintStart_toEndOf="@id/threePlayer"
+            app:layout_constraintTop_toTopOf="@id/playerNum" />
+
+    </RadioGroup>
+
     <Button
         android:id="@+id/startButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_title"
+        android:layout_marginTop="20dp"
         android:onClick="start"
         android:text="@string/textStartButton"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintDimensionRatio="H,2:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/player4"
-        app:layout_constraintWidth_percent="0.2"
-        app:layout_constraintDimensionRatio="H,2:1"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playerNum"
+        app:layout_constraintWidth_percent="0.2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

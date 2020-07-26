@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.catanpoint.R
@@ -11,13 +12,13 @@ import com.example.catanpoint.model.entity.*
 
 class TitleActivity : AppCompatActivity() {
 
+    private var playerNum = 4
     private var players = mutableListOf(
         Pair(Player("", RED), R.id.player1),
         Pair(Player("", ORANGE), R.id.player2),
         Pair(Player("", BLUE), R.id.player3),
         Pair(Player("", CREAM), R.id.player4)
     )
-
     private val playerAndStrings = listOf(
         Triple(players[0], "プレイヤー１", "player1"),
         Triple(players[1], "プレイヤー２", "player2"),
@@ -25,10 +26,24 @@ class TitleActivity : AppCompatActivity() {
         Triple(players[3], "プレイヤー４", "player4")
     )
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_title)
+
+        val group = findViewById<RadioGroup>(R.id.playerNum)
+        group.check(R.id.fourPlayer)
+        group.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.threePlayer -> {
+                    playerNum = 3
+                    findViewById<View>(R.id.player4).visibility = View.GONE
+                }
+                R.id.fourPlayer -> {
+                    playerNum = 4
+                    findViewById<View>(R.id.player4).visibility = View.VISIBLE
+                }
+            }
+        }
         this.displayAllPlayers()
     }
 
@@ -79,7 +94,6 @@ class TitleActivity : AppCompatActivity() {
         //色を変える
         player.color = colors[index]
 
-
     }
 
     private fun decidePlayer(view: View): Triple<Pair<Player?, Int?>?, String?, String?> {
@@ -108,6 +122,7 @@ class TitleActivity : AppCompatActivity() {
             player.name = playerName
             intent.putExtra(key, player)
         }
+        intent.putExtra("playerNum",playerNum)
         startActivity(intent)
     }
 

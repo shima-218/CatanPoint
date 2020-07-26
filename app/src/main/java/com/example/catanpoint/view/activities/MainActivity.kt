@@ -29,12 +29,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val intent = this.intent
 
-        val playerIntents = listOf(
+        val wkPlayerIntents = listOf(
             Pair("player1", R.id.player1),
             Pair("player2", R.id.player2),
             Pair("player3", R.id.player3),
             Pair("player4", R.id.player4)
         )
+
+        val playerNum: Int = intent.getIntExtra("playerNum",4)
+        val playerIntents = mutableListOf<Pair<String,Int>>()
+        for ((iteration, wkPlayerIntent) in wkPlayerIntents.withIndex()){
+            if (iteration < playerNum) {
+                playerIntents.add(iteration,wkPlayerIntent)
+            } else {
+                findViewById<View>(wkPlayerIntent.second).visibility = View.GONE
+            }
+        }
 
         for ((iteration, playerIntent) in playerIntents.withIndex()) {
             val player = intent.getSerializableExtra(playerIntent.first)
@@ -45,6 +55,7 @@ class MainActivity : AppCompatActivity() {
                 )
             }
         }
+
         this.displayPlayers()
         this.displayAllPoints()
     }
