@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         this.displayAllPoints()
     }
 
-    private fun receivePlayers(intent: Intent){
+    private fun receivePlayers(intent: Intent) {
 
         //受け取ったプレイヤー人数を、変数と画面に反映
         val maxPlayerKeys = listOf(
@@ -42,11 +42,11 @@ class MainActivity : AppCompatActivity() {
             Pair("player3", R.id.player3),
             Pair("player4", R.id.player4)
         )
-        val playerNum: Int = intent.getIntExtra("playerNum",4)
-        val playerKeys = mutableListOf<Pair<String,Int>>()
-        for ((iteration, playerKey) in maxPlayerKeys.withIndex()){
+        val playerNum: Int = intent.getIntExtra("playerNum", 4)
+        val playerKeys = mutableListOf<Pair<String, Int>>()
+        for ((iteration, playerKey) in maxPlayerKeys.withIndex()) {
             if (iteration < playerNum) {
-                playerKeys.add(iteration,playerKey)
+                playerKeys.add(iteration, playerKey)
             } else {
                 findViewById<View>(playerKey.second).visibility = View.GONE
             }
@@ -64,12 +64,95 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun displayPlayers() {
+
+        val countTitles = listOf(
+            Pair("都市", R.id.cities),
+            Pair("開拓地", R.id.settlements),
+            Pair(this.modulateCountTitleText("最長交易路"), R.id.roads),
+            Pair("騎士力", R.id.knights),
+            Pair("発展", R.id.develops)
+        )
+
+        //プレイヤー毎
+        for (player in players) {
+            findViewById<View>(player.second).setBackgroundColor(player.first.color.backColor)
+            this.displayPlayerName(player)
+            //項目毎
+            for (countTitle in countTitles) {
+                this.displayCountTitle(player, countTitle)
+                this.displayUpDownButton(player, countTitle)
+            }
+        }
+    }
+
+    private fun displayPlayerName(player: Pair<Player, Int>) {
+        val playerName =
+            findViewById<View>(player.second).findViewById<TextView>(R.id.player_name)
+        playerName.text = this.modulatePlayerNameText(java.lang.String.valueOf(player.first.name)).first
+        playerName.maxLines = this.modulatePlayerNameText(java.lang.String.valueOf(player.first.name)).second
+        playerName.setTextColor(player.first.color.frontColor)
+    }
+
+    private fun displayCountTitle(player: Pair<Player, Int>, countTitle: Pair<String, Int>) {
+        val titleView =
+            findViewById<View>(player.second).findViewById<View>(countTitle.second)
+                .findViewById<TextView>(R.id.count_title)
+        titleView.text = java.lang.String.valueOf(countTitle.first)
+        titleView.setTextColor(player.first.color.frontColor)
+    }
+
+    private fun displayUpDownButton(player: Pair<Player, Int>, countTitle: Pair<String, Int>) {
+        //ボタンを定義
+        val btn: GradientDrawable =
+            ResourcesCompat.getDrawable(
+                resources,
+                R.drawable.button,
+                null
+            ) as GradientDrawable
+        btn.setColor(player.first.color.backColor)
+        btn.setStroke(2, player.first.color.frontColor)
+        //+ボタン
+        val upView =
+            findViewById<View>(player.second).findViewById<View>(countTitle.second)
+                .findViewById<TextView>(R.id.up)
+        upView.setTextColor(player.first.color.frontColor)
+        upView.background = btn
+        //-ボタン
+        val downView =
+            findViewById<View>(player.second).findViewById<View>(countTitle.second)
+                .findViewById<TextView>(R.id.down)
+        downView.setTextColor(player.first.color.frontColor)
+        downView.background = btn
+    }
+
+    private fun modulatePlayerNameText(string: String): Pair<String, Int> {
+        if (string.length >= 6) {
+            return Pair(
+                string.substring(
+                    0,
+                    3
+                ) + System.getProperty("line.separator") + string.substring(3, string.length), 2
+            )
+        }
+        return Pair(string, 1)
+    }
+
     fun changeCount(view: View) {
         val (player: Player?, id: Int?) = this.decidePlayer(view)
         if (player != null && id != null) {
             this.calculateCount(view, player, id)
             this.displayAllPoints()
         }
+    }
+
+    private fun decidePlayer(view: View): Pair<Player?, Int?> {
+        for (player in players) {
+            if (view.parent.parent == findViewById(player.second)) {
+                return player
+            }
+        }
+        return Pair(null, null)
     }
 
     private fun calculateCount(view: View, player: Player, id: Int) {
@@ -132,29 +215,6 @@ class MainActivity : AppCompatActivity() {
         return count
     }
 
-    private fun displayPoints(player: Player, id: Int) {
-
-        val numOfXXXs = listOf(
-            Pair(player.numOfCities, R.id.cities),
-            Pair(player.numOfSettlements, R.id.settlements),
-            Pair(player.lengthOfLongestRoads, R.id.roads),
-            Pair(player.numOfUsedKnights, R.id.knights),
-            Pair(player.numOfDevPoints, R.id.develops)
-        )
-
-        val pointsView = findViewById<View>(id).findViewById<TextView>(R.id.points)
-        pointsView.text = java.lang.String.valueOf(player.points)
-        pointsView.setTextColor(player.color.frontColor)
-
-        for (numOfXXX in numOfXXXs) {
-            val view = findViewById<View>(id).findViewById<View>(numOfXXX.second)
-                .findViewById<TextView>(R.id.count)
-            view.text = java.lang.String.valueOf(numOfXXX.first)
-            view.setTextColor(player.color.frontColor)
-        }
-
-    }
-
     private fun displayAllPoints() {
         this.decideSpecialPoints()
         this.displaySpecialPoints()
@@ -173,130 +233,66 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displaySpecialPoints() {
+        this.displaySpecialPoints(playerWithLongestRoadsIndex,R.id.longest_roads,this.modulateCountTitleText("最長交易路"))
+        this.displaySpecialPoints(playerWithLargestArmyIndex,R.id.largest_army,this.modulateCountTitleText("最大騎士力"))
+    }
 
-        //画面の向きによって改行位置が異なる
-        var roadsText = "最長"+System.getProperty ("line.separator")+"交易路"
-        var knightsText = "最大"+System.getProperty ("line.separator")+"騎士力"
-        if(resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
-            roadsText = "最長交易路"
-            knightsText = "最大騎士力"
+    private fun modulateCountTitleText(string: String): String {
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            return string.substring(
+                    0,
+                    2
+                ) + System.getProperty("line.separator") + string.substring(2, string.length)
         }
+        return string
+    }
 
+    private fun displaySpecialPoints(index: Int, id: Int, text: String) {
         //初期化
         for (player in players) {
-            val roadsView = findViewById<View>(player.second).findViewById<TextView>(R.id.longest_roads)
-            roadsView.text = roadsText
-            roadsView.setTextColor(player.first.color.backColor)
-            roadsView.background = null
-            val knightsView = findViewById<View>(player.second).findViewById<TextView>(R.id.largest_army)
-            knightsView.text = knightsText
-            knightsView.setTextColor(player.first.color.backColor)
-            knightsView.background = null
+            val view =
+                findViewById<View>(player.second).findViewById<TextView>(id)
+            view.text = text
+            view.setTextColor(player.first.color.backColor)
+            view.background = null
         }
-
-        //該当プレイヤーに表示
-        //最長交易路
+        //表示
         val frameWidth = 2
-        if (playerWithLongestRoadsIndex != -1) {
+        if (index != -1) {
             val frame: GradientDrawable =
                 ResourcesCompat.getDrawable(
                     resources,
                     R.drawable.special_point_frame,
                     null
                 ) as GradientDrawable
-            frame.setStroke(frameWidth, players[playerWithLongestRoadsIndex].first.color.frontColor)
-            val roadsView =
-                findViewById<View>(players[playerWithLongestRoadsIndex].second).findViewById<TextView>(R.id.longest_roads)
-            roadsView.setTextColor(players[playerWithLongestRoadsIndex].first.color.frontColor)
-            roadsView.background = frame
-        }
-        //最大騎士力
-        if (playerWithLargestArmyIndex != -1) {
-            val frame: GradientDrawable =
-                ResourcesCompat.getDrawable(
-                    resources,
-                    R.drawable.special_point_frame,
-                    null
-                ) as GradientDrawable
-            frame.setStroke(frameWidth, players[playerWithLargestArmyIndex].first.color.frontColor)
-            val knightsView =
-                findViewById<View>(players[playerWithLargestArmyIndex].second).findViewById<TextView>(R.id.largest_army)
-            knightsView.setTextColor(players[playerWithLargestArmyIndex].first.color.frontColor)
-            knightsView.background = frame
+            frame.setStroke(frameWidth, players[index].first.color.frontColor)
+            val view =
+                findViewById<View>(players[index].second).findViewById<TextView>(id)
+            view.setTextColor(players[index].first.color.frontColor)
+            view.background = frame
         }
     }
 
-    private fun displayPlayers() {
-
-        //最長交易路のみ、画面の向きによって改行位置が異なる
-        var roads = Pair("最長"+System.getProperty ("line.separator")+"交易路", R.id.roads)
-        if(resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
-            roads = Pair("最長交易路",R.id.roads)
-        }
-
-        //各項目のリスト
-        val countTitles = listOf(
-            Pair("都市", R.id.cities),
-            Pair("開拓地", R.id.settlements),
-            roads,
-            Pair("騎士力", R.id.knights),
-            Pair("発展", R.id.develops)
-        )
-
-        //プレイヤー毎
-        for (player in players) {
-            val playerName =
-                findViewById<View>(player.second).findViewById<TextView>(R.id.player_name)
-            playerName.text = this.twoLine(java.lang.String.valueOf(player.first.name)).first
-            playerName.maxLines = this.twoLine(java.lang.String.valueOf(player.first.name)).second
-            playerName.setTextColor(player.first.color.frontColor)
-
-            val view = findViewById<View>(player.second)
-            view.setBackgroundColor(player.first.color.backColor)
-
-            //項目毎
-            for (countTitle in countTitles) {
-                val titleView =
-                    findViewById<View>(player.second).findViewById<View>(countTitle.second)
-                        .findViewById<TextView>(R.id.count_title)
-                titleView.text = java.lang.String.valueOf(countTitle.first)
-                titleView.setTextColor(player.first.color.frontColor)
-                val btn: GradientDrawable =
-                    ResourcesCompat.getDrawable(
-                        resources,
-                        R.drawable.button,
-                        null
-                    ) as GradientDrawable
-                btn.setColor(player.first.color.backColor)
-                btn.setStroke(2, player.first.color.frontColor)
-                val upView =
-                    findViewById<View>(player.second).findViewById<View>(countTitle.second)
-                        .findViewById<TextView>(R.id.up)
-                upView.setTextColor(player.first.color.frontColor)
-                upView.background = btn
-                val downView =
-                    findViewById<View>(player.second).findViewById<View>(countTitle.second)
-                        .findViewById<TextView>(R.id.down)
-                downView.setTextColor(player.first.color.frontColor)
-                downView.background = btn
-            }
-        }
+    private fun displayPoints(player: Player, id: Int) {
+        this.displayPoint(player,id)
+        this.displayCount(player,id,player.numOfCities, R.id.cities)
+        this.displayCount(player,id,player.numOfSettlements, R.id.settlements)
+        this.displayCount(player,id,player.lengthOfLongestRoads, R.id.roads)
+        this.displayCount(player,id,player.numOfUsedKnights, R.id.knights)
+        this.displayCount(player,id,player.numOfDevPoints, R.id.develops)
     }
 
-    private fun twoLine(string: String): Pair<String,Int>{
-        if (string.length >= 6){
-            return Pair(string.substring(0,3) + System.getProperty ("line.separator") + string.substring(3,string.length),2)
-        }
-        return Pair(string,1)
+    private fun displayPoint(player: Player, id: Int){
+        val pointsView = findViewById<View>(id).findViewById<TextView>(R.id.points)
+        pointsView.text = java.lang.String.valueOf(player.points)
+        pointsView.setTextColor(player.color.frontColor)
     }
 
-    private fun decidePlayer(view: View): Pair<Player?, Int?> {
-        for (player in players) {
-            if (view.parent.parent == findViewById(player.second)) {
-                return player
-            }
-        }
-        return Pair(null, null)
+    private fun displayCount(player: Player, playerId: Int, count: Int, countId: Int){
+        val view = findViewById<View>(playerId).findViewById<View>(countId)
+            .findViewById<TextView>(R.id.count)
+        view.text = java.lang.String.valueOf(count)
+        view.setTextColor(player.color.frontColor)
     }
 
     fun resetAllPoints(view: View) {
@@ -312,7 +308,7 @@ class MainActivity : AppCompatActivity() {
         this.quit()
     }
 
-    private fun quit(){
+    private fun quit() {
         if (quitDialog == null) {
             quitDialog = AlertDialog.Builder(this)
                 .setTitle("ゲームを終了しますか？")
