@@ -14,5 +14,6 @@
 
     <dimen name="margin_title">30dp</dimen>
     <dimen name="margin_count">5dp</dimen>
+    <dimen name="special_points_text_padding">3dp</dimen>
 
 </resources>

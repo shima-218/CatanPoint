@@ -178,24 +178,47 @@ class MainActivity : AppCompatActivity() {
             knightsText = "最大騎士力"
         }
 
+        //初期化
         for (player in players) {
             val roadsView = findViewById<View>(player.second).findViewById<TextView>(R.id.longest_roads)
             roadsView.text = roadsText
             roadsView.setTextColor(player.first.color.backColor)
+            roadsView.background = null
             val knightsView = findViewById<View>(player.second).findViewById<TextView>(R.id.largest_army)
             knightsView.text = knightsText
             knightsView.setTextColor(player.first.color.backColor)
+            knightsView.background = null
         }
 
+        //該当プレイヤーに表示
+        //最長交易路
+        val frameWidth = 2
         if (playerWithLongestRoadsIndex != -1) {
+            val frame: GradientDrawable =
+                ResourcesCompat.getDrawable(
+                    resources,
+                    R.drawable.special_point_frame,
+                    null
+                ) as GradientDrawable
+            frame.setStroke(frameWidth, players[playerWithLongestRoadsIndex].first.color.frontColor)
             val roadsView =
                 findViewById<View>(players[playerWithLongestRoadsIndex].second).findViewById<TextView>(R.id.longest_roads)
             roadsView.setTextColor(players[playerWithLongestRoadsIndex].first.color.frontColor)
+            roadsView.background = frame
         }
+        //最大騎士力
         if (playerWithLargestArmyIndex != -1) {
+            val frame: GradientDrawable =
+                ResourcesCompat.getDrawable(
+                    resources,
+                    R.drawable.special_point_frame,
+                    null
+                ) as GradientDrawable
+            frame.setStroke(frameWidth, players[playerWithLargestArmyIndex].first.color.frontColor)
             val knightsView =
                 findViewById<View>(players[playerWithLargestArmyIndex].second).findViewById<TextView>(R.id.largest_army)
             knightsView.setTextColor(players[playerWithLargestArmyIndex].first.color.frontColor)
+            knightsView.background = frame
         }
     }
 
