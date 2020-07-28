@@ -28,36 +28,40 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val intent = this.intent
+        this.receivePlayers(intent)
+        this.displayPlayers()
+        this.displayAllPoints()
+    }
 
-        val wkPlayerIntents = listOf(
+    private fun receivePlayers(intent: Intent){
+
+        //受け取ったプレイヤー人数を、変数と画面に反映
+        val maxPlayerKeys = listOf(
             Pair("player1", R.id.player1),
             Pair("player2", R.id.player2),
             Pair("player3", R.id.player3),
             Pair("player4", R.id.player4)
         )
-
         val playerNum: Int = intent.getIntExtra("playerNum",4)
-        val playerIntents = mutableListOf<Pair<String,Int>>()
-        for ((iteration, wkPlayerIntent) in wkPlayerIntents.withIndex()){
+        val playerKeys = mutableListOf<Pair<String,Int>>()
+        for ((iteration, playerKey) in maxPlayerKeys.withIndex()){
             if (iteration < playerNum) {
-                playerIntents.add(iteration,wkPlayerIntent)
+                playerKeys.add(iteration,playerKey)
             } else {
-                findViewById<View>(wkPlayerIntent.second).visibility = View.GONE
+                findViewById<View>(playerKey.second).visibility = View.GONE
             }
         }
 
-        for ((iteration, playerIntent) in playerIntents.withIndex()) {
-            val player = intent.getSerializableExtra(playerIntent.first)
+        //受け取ったプレイヤー情報を変数に格納
+        for ((iteration, playerKey) in playerKeys.withIndex()) {
+            val player = intent.getSerializableExtra(playerKey.first)
             if (player is Player) {
                 players.add(
                     iteration,
-                    Pair(player, playerIntent.second)
+                    Pair(player, playerKey.second)
                 )
             }
         }
-
-        this.displayPlayers()
-        this.displayAllPoints()
     }
 
     fun changeCount(view: View) {
