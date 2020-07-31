@@ -42,24 +42,16 @@ class MainActivity : AppCompatActivity() {
             Pair("player3", R.id.player3),
             Pair("player4", R.id.player4)
         )
+
         val playerNum: Int = intent.getIntExtra("playerNum", 4)
-        val playerKeys = mutableListOf<Pair<String, Int>>()
         for ((iteration, playerKey) in maxPlayerKeys.withIndex()) {
             if (iteration < playerNum) {
-                playerKeys.add(iteration, playerKey)
+                val player = intent.getSerializableExtra(playerKey.first)
+                if (player is Player) {
+                    players.add(iteration, Pair(player, playerKey.second))
+                }
             } else {
                 findViewById<View>(playerKey.second).visibility = View.GONE
-            }
-        }
-
-        //受け取ったプレイヤー情報を変数に格納
-        for ((iteration, playerKey) in playerKeys.withIndex()) {
-            val player = intent.getSerializableExtra(playerKey.first)
-            if (player is Player) {
-                players.add(
-                    iteration,
-                    Pair(player, playerKey.second)
-                )
             }
         }
     }
@@ -89,8 +81,10 @@ class MainActivity : AppCompatActivity() {
     private fun displayPlayerName(player: Pair<Player, Int>) {
         val playerName =
             findViewById<View>(player.second).findViewById<TextView>(R.id.player_name)
-        playerName.text = this.modulatePlayerNameText(java.lang.String.valueOf(player.first.name)).first
-        playerName.maxLines = this.modulatePlayerNameText(java.lang.String.valueOf(player.first.name)).second
+        playerName.text =
+            this.modulatePlayerNameText(java.lang.String.valueOf(player.first.name)).first
+        playerName.maxLines =
+            this.modulatePlayerNameText(java.lang.String.valueOf(player.first.name)).second
         playerName.setTextColor(player.first.color.frontColor)
     }
 
@@ -129,10 +123,9 @@ class MainActivity : AppCompatActivity() {
     private fun modulatePlayerNameText(string: String): Pair<String, Int> {
         if (string.length >= 6) {
             return Pair(
-                string.substring(
-                    0,
-                    3
-                ) + System.getProperty("line.separator") + string.substring(3, string.length), 2
+                string.substring(0, 3)
+                        + System.getProperty("line.separator")
+                        + string.substring(3, string.length), 2
             )
         }
         return Pair(string, 1)
@@ -233,16 +226,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displaySpecialPoints() {
-        this.displaySpecialPoints(playerWithLongestRoadsIndex,R.id.longest_roads,this.modulateCountTitleText("最長交易路"))
-        this.displaySpecialPoints(playerWithLargestArmyIndex,R.id.largest_army,this.modulateCountTitleText("最大騎士力"))
+        this.displaySpecialPoints(
+            playerWithLongestRoadsIndex,
+            R.id.longest_roads,
+            this.modulateCountTitleText("最長交易路")
+        )
+        this.displaySpecialPoints(
+            playerWithLargestArmyIndex,
+            R.id.largest_army,
+            this.modulateCountTitleText("最大騎士力")
+        )
     }
 
     private fun modulateCountTitleText(string: String): String {
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            return string.substring(
-                    0,
-                    2
-                ) + System.getProperty("line.separator") + string.substring(2, string.length)
+            return string.substring(0, 2)+
+                    System.getProperty("line.separator")+
+                    string.substring(2, string.length)
         }
         return string
     }
@@ -274,21 +274,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayPoints(player: Player, id: Int) {
-        this.displayPoint(player,id)
-        this.displayCount(player,id,player.numOfCities, R.id.cities)
-        this.displayCount(player,id,player.numOfSettlements, R.id.settlements)
-        this.displayCount(player,id,player.lengthOfLongestRoads, R.id.roads)
-        this.displayCount(player,id,player.numOfUsedKnights, R.id.knights)
-        this.displayCount(player,id,player.numOfDevPoints, R.id.develops)
+        this.displayPoint(player, id)
+        this.displayCount(player, id, player.numOfCities, R.id.cities)
+        this.displayCount(player, id, player.numOfSettlements, R.id.settlements)
+        this.displayCount(player, id, player.lengthOfLongestRoads, R.id.roads)
+        this.displayCount(player, id, player.numOfUsedKnights, R.id.knights)
+        this.displayCount(player, id, player.numOfDevPoints, R.id.develops)
     }
 
-    private fun displayPoint(player: Player, id: Int){
+    private fun displayPoint(player: Player, id: Int) {
         val pointsView = findViewById<View>(id).findViewById<TextView>(R.id.points)
         pointsView.text = java.lang.String.valueOf(player.points)
         pointsView.setTextColor(player.color.frontColor)
     }
 
-    private fun displayCount(player: Player, playerId: Int, count: Int, countId: Int){
+    private fun displayCount(player: Player, playerId: Int, count: Int, countId: Int) {
         val view = findViewById<View>(playerId).findViewById<View>(countId)
             .findViewById<TextView>(R.id.count)
         view.text = java.lang.String.valueOf(count)
