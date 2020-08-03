@@ -9,8 +9,9 @@
     <include
         android:id="@+id/player1"
         layout="@layout/player_info"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintHeight_max="160dp"
         app:layout_constraintBottom_toTopOf="@+id/player2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,8 +21,9 @@
     <include
         android:id="@+id/player2"
         layout="@layout/player_info"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintHeight_max="160dp"
         app:layout_constraintBottom_toTopOf="@+id/player3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,8 +33,9 @@
     <include
         android:id="@+id/player3"
         layout="@layout/player_info"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintHeight_max="160dp"
         app:layout_constraintBottom_toTopOf="@+id/player4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,8 +45,9 @@
     <include
         android:id="@+id/player4"
         layout="@layout/player_info"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintHeight_max="160dp"
         app:layout_constraintBottom_toTopOf="@+id/resetButton"
         app:layout_constraintEnd_toEndOf="parent"
