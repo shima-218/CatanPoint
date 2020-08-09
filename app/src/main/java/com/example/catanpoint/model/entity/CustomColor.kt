@@ -1,4 +1,4 @@
-package catanpoint.model.entity
+package com.example.catanpoint.model.entity
 
 import android.graphics.Color
 import java.io.Serializable

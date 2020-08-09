@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">カタン得点計算</string>
+    <string name="app_name">カタン点数計算</string>
 
     <string name="textPoint1down" >−</string>
     <string name="textPoint1up">＋</string>

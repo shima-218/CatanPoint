@@ -1,4 +1,4 @@
-package catanpoint.view.activities
+package com.example.catanpoint.view.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +7,8 @@ import android.widget.Button
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import catanpoint.R
-import catanpoint.model.entity.*
+import com.example.catanpoint.R
+import com.example.catanpoint.model.entity.*
 
 class TitleActivity : AppCompatActivity() {
 
