@@ -36,7 +36,7 @@ class TitleActivity : AppCompatActivity() {
             when (checkedId) {
                 R.id.threePlayer -> {
                     playerNum = 3
-                    findViewById<View>(R.id.player4).visibility = View.GONE
+                    findViewById<View>(R.id.player4).visibility = View.INVISIBLE
                 }
                 R.id.fourPlayer -> {
                     playerNum = 4

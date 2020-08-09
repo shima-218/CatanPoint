@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
         //横360dp以下対応
         val dpWidth = resources.displayMetrics.widthPixels / resources.displayMetrics.density
         if(dpWidth <= 320){
-            textView.textSize=10F
+            textView.textSize=11F
         } else if (dpWidth <=390){
             textView.textSize=13F
         }
