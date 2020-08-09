@@ -1,6 +1,6 @@
-package com.example.catanpoint.model.usecase
+package com.shima218.catanpoint.model.usecase
 
-import com.example.catanpoint.model.entity.Player
+import com.shima218.catanpoint.model.entity.Player
 import java.util.Collections.max
 
 fun decideLongestRoads(players: List<Pair<Player, Int>>, preWinnerIndex: Int): Int {

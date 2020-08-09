@@ -1,4 +1,4 @@
-package com.example.catanpoint.model.entity
+package com.shima218.catanpoint.model.entity
 
 import java.io.Serializable
 

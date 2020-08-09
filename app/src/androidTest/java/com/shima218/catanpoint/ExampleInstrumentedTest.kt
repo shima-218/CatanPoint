@@ -1,4 +1,4 @@
-package com.example.catanpoint
+package com.shima218.catanpoint
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

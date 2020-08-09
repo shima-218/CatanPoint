@@ -1,4 +1,4 @@
-package com.example.catanpoint
+package com.shima218.catanpoint
 
 import org.junit.Test
 
