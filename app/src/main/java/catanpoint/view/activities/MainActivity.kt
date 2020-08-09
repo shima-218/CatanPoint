@@ -1,4 +1,4 @@
-package com.example.catanpoint.view.activities
+package catanpoint.view.activities
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -11,10 +11,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import com.example.catanpoint.R
-import com.example.catanpoint.model.entity.Player
-import com.example.catanpoint.model.usecase.decideLargestArmy
-import com.example.catanpoint.model.usecase.decideLongestRoads
+import catanpoint.R
+import catanpoint.model.entity.Player
+import catanpoint.model.usecase.decideLargestArmy
+import catanpoint.model.usecase.decideLongestRoads
 
 
 class MainActivity : AppCompatActivity() {
