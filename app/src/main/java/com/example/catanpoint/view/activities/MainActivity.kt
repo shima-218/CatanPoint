@@ -94,6 +94,17 @@ class MainActivity : AppCompatActivity() {
                 .findViewById<TextView>(R.id.count_title)
         titleView.text = java.lang.String.valueOf(countTitle.first)
         titleView.setTextColor(player.first.color.frontColor)
+        this.modulateTextSize(titleView)
+    }
+
+    private fun modulateTextSize(textView: TextView){
+        //横360dp以下対応
+        val dpWidth = resources.displayMetrics.widthPixels / resources.displayMetrics.density
+        if(dpWidth <= 320){
+            textView.textSize=10F
+        } else if (dpWidth <=390){
+            textView.textSize=13F
+        }
     }
 
     private fun displayUpDownButton(player: Pair<Player, Int>, countTitle: Pair<String, Int>) {
@@ -255,6 +266,7 @@ class MainActivity : AppCompatActivity() {
             view.text = text
             view.setTextColor(player.first.color.backColor)
             view.background = null
+            this.modulateTextSize(view)
         }
         //表示
         val frameWidth = 2
